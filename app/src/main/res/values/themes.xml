@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.PlantChronicle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">#698474</item>
+        <item name="colorPrimaryVariant">#889E81</item>
+        <item name="colorOnPrimary">#E5E4CC</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">#BAC7A7</item>
+        <item name="colorSecondaryVariant">#5E8B7E</item>
+        <item name="colorOnSecondary">#2F5D62</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="21">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
