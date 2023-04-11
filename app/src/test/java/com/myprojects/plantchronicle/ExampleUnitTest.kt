@@ -22,4 +22,8 @@ class ExampleUnitTest {
     fun addThreeAndThree_equalsSix() {
         assertEquals(6, 3+3)
     }
+
+    fun addFourAndThree_equalsSeven() {
+        assertEquals(7, 4+3)
+    }
 }
