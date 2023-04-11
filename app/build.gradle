@@ -30,6 +30,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {
@@ -46,6 +47,7 @@ dependencies {
 
     //unit test
     testImplementation 'androidx.arch.core:core-testing:2.2.0'
+    testImplementation 'io.mockk:mockk:1.11.0'
 
     //ui test
     androidTestImplementation 'androidx.arch.core:core-testing:2.2.0'
