@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Plant Chronicle</string>
+    <string name="Latitude">Latitude</string>
+    <string name="Longtitude">Longtitude</string>
+    <string name="plantName">Plant name</string>
+    <string name="description">Description</string>
+    <string name="date_planted">Date planted</string>
 </resources>
