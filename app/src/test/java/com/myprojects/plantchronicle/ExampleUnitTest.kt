@@ -37,4 +37,9 @@ class ExampleUnitTest {
         var plant : Plant = Plant("Cercis", "Canadesis", "Eastern Redbud")
         assertEquals("Eastern Redbud", plant.toString())
     }
+
+    @Test
+    fun addition_isNotCorrect() {
+        assertEquals(4, 1+2)
+    }
 }
