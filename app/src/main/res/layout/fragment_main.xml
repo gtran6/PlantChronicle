@@ -14,6 +14,7 @@
         android:text="@string/Latitude"
         android:layout_margin="8dp"
         android:textSize="16sp"
+        android:textColor="@color/material_dynamic_neutral10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,6 +27,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/Longtitude"
         android:textSize="16sp"
+        android:textColor="@color/material_dynamic_neutral10"
         app:layout_constraintStart_toStartOf="@+id/lblLatitude"
         app:layout_constraintTop_toBottomOf="@+id/lblLatitude">
 
@@ -37,6 +39,7 @@
         android:layout_height="wrap_content"
         android:text="0.0"
         android:textSize="16sp"
+        android:textColor="@color/material_dynamic_neutral10"
         android:layout_marginStart="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/lblLatitude"
         app:layout_constraintStart_toEndOf="@+id/lblLatitude"
@@ -50,6 +53,7 @@
         android:layout_height="wrap_content"
         android:text="0.0"
         android:textSize="16sp"
+        android:textColor="@color/material_dynamic_neutral10"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/latitudeValue"
         app:layout_constraintStart_toStartOf="@+id/latitudeValue"
@@ -109,6 +113,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtDatePlanted">
