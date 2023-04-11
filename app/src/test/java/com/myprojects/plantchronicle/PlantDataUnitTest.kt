@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import com.myprojects.plantchronicle.dto.Plant
 import com.myprojects.plantchronicle.service.PlantService
 import com.myprojects.plantchronicle.ui.main.MainViewModel
+import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -36,6 +38,15 @@ class PlantDataUnitTest {
         givenAFeedOfMockedPlantDataAreAvailable()
         whenSearchForRedbud()
         thenResultContainsEasternRedbud()
+        thenVerifyFunctionsInvoked()
+    }
+
+    private fun thenVerifyFunctionsInvoked() {
+        verify {  plantService.fetchPlants("Redbud") }
+        verify(exactly = 0) {
+            plantService.fetchPlants("Maple")
+        }
+        confirmVerified(plantService)
     }
 
     private fun givenAFeedOfMockedPlantDataAreAvailable() {
