@@ -1,5 +1,6 @@
 package com.myprojects.plantchronicle
 
+import com.myprojects.plantchronicle.dto.Plant
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -31,6 +32,7 @@ class ExampleUnitTest {
         assertEquals(8, 5+3)
     }
 
+    @Test
     fun confirmEasternRedbud_outputsEasternRedbud() {
         var plant : Plant = Plant("Cercis", "Canadesis", "Eastern Redbud")
         assertEquals("Eastern Redbud", plant.toString())
