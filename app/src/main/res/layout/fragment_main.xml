@@ -137,8 +137,8 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="340dp"
-        android:layout_height="300dp"
+        android:layout_width="360dp"
+        android:layout_height="320dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
