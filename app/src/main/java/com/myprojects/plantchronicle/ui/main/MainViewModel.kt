@@ -2,7 +2,7 @@ package com.myprojects.plantchronicle.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.myprojects.plantchronicle.dto.Plant
+import com.myprojects.plantchronicle.dao.dto.Plant
 import com.myprojects.plantchronicle.service.PlantService
 
 class MainViewModel : ViewModel() {

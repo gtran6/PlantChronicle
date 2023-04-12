@@ -2,7 +2,7 @@ package com.myprojects.plantchronicle.service
 
 import androidx.lifecycle.MutableLiveData
 import com.myprojects.plantchronicle.dao.IPlaintDAO
-import com.myprojects.plantchronicle.dto.Plant
+import com.myprojects.plantchronicle.dao.dto.Plant
 import com.myprojects.plantchronicle.extra.RetrofitClientInstance
 import retrofit2.Call
 import retrofit2.Callback
