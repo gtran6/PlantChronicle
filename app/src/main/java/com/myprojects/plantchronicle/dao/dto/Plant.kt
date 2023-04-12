@@ -1,4 +1,4 @@
-package com.myprojects.plantchronicle.dto
+package com.myprojects.plantchronicle.dao.dto
 
 import com.google.gson.annotations.SerializedName
 
