@@ -3,15 +3,10 @@ package com.myprojects.plantchronicle.ui.main
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,10 +17,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.constraintlayout.core.motion.utils.Utils
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.myprojects.plantchronicle.R
@@ -49,6 +42,7 @@ class MainFragment : Fragment() {
 
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+
     companion object {
         fun newInstance() = MainFragment()
         val TAG = "CameraXFragment"
@@ -59,6 +53,13 @@ class MainFragment : Fragment() {
     }
 
     private lateinit var viewModel: MainViewModel
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("UseRequireInsteadOfGet")
@@ -75,11 +76,12 @@ class MainFragment : Fragment() {
             )
         })
         // Request camera permissions
-        if (allPermissionsGranted()) {
+/*        if (allPermissionsGranted()) {
             startCamera()
         } else {
             ActivityCompat.requestPermissions(
-                activity!!, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+                activity!!, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+            )
         }
         binding.btnTakePhoto.setOnClickListener {
             takePhoto()
@@ -87,9 +89,10 @@ class MainFragment : Fragment() {
 
         outputDirectory = getOutputDirectory()
 
-        cameraExecutor = Executors.newSingleThreadExecutor()
+        cameraExecutor = Executors.newSingleThreadExecutor()*/
     }
-
+}
+/*
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun getOutputDirectory(): File {
         val mediaDir = activity?.externalMediaDirs?.firstOrNull()?.let {
@@ -101,6 +104,7 @@ class MainFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
+
         val imageCapture = imageCapture ?: return
 
         // Create timestamped output file to hold the image
@@ -174,13 +178,6 @@ class MainFragment : Fragment() {
         } else 0
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
@@ -224,98 +221,4 @@ class MainFragment : Fragment() {
         super.onResume()
         isOffline = false
     }
-}
-// binding.btnTakePhoto.setOnClickListener {
-// prepTakePhoto()
-// }
-// binding.btnLogon.setOnClickListener {
-// prepOpenImageGallery()
-// }
-// }
-//
-// private fun prepOpenImageGallery() {
-// Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
-// type = "image/*"
-// startActivityForResult(this, IMAGE_GALLERY_REQUEST_CODE)
-// }
-// }
-//
-// @SuppressLint("UseRequireInsteadOfGet")
-// private fun prepTakePhoto() {
-// if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-// takePhoto()
-// } else {
-// val permissionRequest = arrayOf(Manifest.permission.CAMERA);
-// requestPermissions(permissionRequest, CAMERA_PERMISSION_REQUEST_CODE)
-//
-// }
-// }
-//
-// override fun onRequestPermissionsResult(
-// requestCode: Int,
-// permissions: Array<out String>,
-// grantResults: IntArray
-// ) {
-// super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-// when(requestCode) {
-// CAMERA_PERMISSION_REQUEST_CODE -> {
-// if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-// // permission granted, let's do stuff.
-// takePhoto()
-// } else {
-// Toast.makeText(context, "Unable to take photo without permission", Toast.LENGTH_LONG).show()
-// }
-// }
-// }
-// }
-//
-// @SuppressLint("UseRequireInsteadOfGet")
-// private fun takePhoto() {
-// Intent(MediaStore.ACTION_IMAGE_CAPTURE).also{
-// takePictureIntent -> takePictureIntent.resolveActivity(context!!.packageManager)
-// if (takePictureIntent == null) {
-// Toast.makeText(context, "Unable to save photo", Toast.LENGTH_LONG).show()
-// } else {
-// // if we are here, we have a valid intent.
-// val photoFile: File = createImageFile()
-// photoFile?.also {
-// val photoURI = FileProvider.getUriForFile(activity!!.applicationContext, "com.myprojects.plantchronicle.fileprovider", it)
-// takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile)
-// startActivityForResult(takePictureIntent, SAVE_IMAGE_REQUEST_CODE)
-// }
-// }
-// }
-// }
-//
-// @SuppressLint("UseRequireInsteadOfGet")
-// private fun createImageFile(): File {
-// // genererate a unique filename with date.
-// val timestamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-// // get access to the directory where we can write pictures.
-// val storageDir:File? = context!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-// return File.createTempFile("PlantDiary${timestamp}", ".jpg", storageDir).apply {
-// currentPhotoPath = absolutePath
-// }
-// }
-//
-// @SuppressLint("UseRequireInsteadOfGet", "NewApi")
-// override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-// super.onActivityResult(requestCode, resultCode, data)
-// if (resultCode == RESULT_OK) {
-// if (requestCode == CAMERA_REQUEST_CODE)  {
-// // now we can get the thumbnail
-// val imageBitmap = data!!.extras!!.get("data") as Bitmap
-// binding.plantImage.setImageBitmap(imageBitmap)
-// } else if (requestCode == SAVE_IMAGE_REQUEST_CODE) {
-// Toast.makeText(context, "Image Saved", Toast.LENGTH_LONG).show()
-// } else if (requestCode == IMAGE_GALLERY_REQUEST_CODE) {
-// if (data != null && data.data != null) {
-// val image = data.data
-// val source = ImageDecoder.createSource(activity!!.contentResolver, image!!)
-// val bitmap = ImageDecoder.decodeBitmap(source)
-// binding.plantImage.setImageBitmap(bitmap)
-//
-// }
-// }
-// }
-// }
+}*/
