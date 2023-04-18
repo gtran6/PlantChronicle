@@ -1,6 +1,6 @@
 package com.myprojects.plantchronicle.dao
 
-import com.myprojects.plantchronicle.dao.dto.Plant
+import com.myprojects.plantchronicle.dto.Plant
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
