@@ -1,9 +1,5 @@
 # Plant Chronicle Project
 ---
-Design Document 
-
-Giang Tran 
-
 ## Introduction
 
 Did you plant an apple tree and struggle to remember when to water and fertilize it? 
@@ -62,6 +58,7 @@ When
 
 Then when I navigate to the Specimen History view, I should see at least one Malus domestica ‘Fuji’ specimen with the a photo of a Fuji apple seedling.
 
-
+### Developed By
+Giang Tran
 
 
