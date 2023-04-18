@@ -1,8 +1,11 @@
 package com.myprojects.plantchronicle
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +16,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.R
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
@@ -25,13 +29,16 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.myprojects.plantchronicle.databinding.ActivityMainBinding
+import com.myprojects.plantchronicle.ui.main.LocationViewModel
 import com.myprojects.plantchronicle.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private val CAMERA_REQUEST_CODE = 1
     private val GALLERY_REQUEST_CODE = 2
+    private val LOCATION_PERMISSION_REQUEST_CODE = 3
     private lateinit var viewModel: MainViewModel
+    private lateinit var locationViewModel: LocationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +73,26 @@ class MainActivity : AppCompatActivity() {
             }
             pictureDialog.show()
         }
+
+        prepRequestLocationUpdates()
+    }
+
+    @SuppressLint("NewApi")
+    private fun prepRequestLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            requestLocationUpdates()
+        } else {
+            val permissionRequest = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+            requestPermissions(permissionRequest, LOCATION_PERMISSION_REQUEST_CODE)
+        }
+    }
+
+    private fun requestLocationUpdates() {
+        locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
+        locationViewModel.getLocationLiveData().observe(this, Observer {
+            binding.latitudeValue.text = it.latitude
+            binding.longtitudeValue.text = it.longitude
+        })
     }
 
     private fun galleryCheckPermission() {
@@ -75,7 +102,6 @@ class MainActivity : AppCompatActivity() {
             override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
                 gallery()
             }
-
             override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
                 Toast.makeText(
                     this@MainActivity,
@@ -107,20 +133,16 @@ class MainActivity : AppCompatActivity() {
                 object : MultiplePermissionsListener {
                     override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
                         report?.let {
-
                             if (report.areAllPermissionsGranted()) {
                                 camera()
                             }
-
                         }
                     }
-
                     override fun onPermissionRationaleShouldBeShown(
                         p0: MutableList<PermissionRequest>?,
                         p1: PermissionToken?) {
                         showRotationalDialogForPermission()
                     }
-
                 }
             ).onSameThread().check()
     }
@@ -142,12 +164,10 @@ class MainActivity : AppCompatActivity() {
                     val uri = Uri.fromParts("package", packageName, null)
                     intent.data = uri
                     startActivity(intent)
-
                 } catch (e: ActivityNotFoundException) {
                     e.printStackTrace()
                 }
             }
-
             .setNegativeButton("CANCEL") { dialog, _ ->
                 dialog.dismiss()
             }.show()
@@ -159,12 +179,13 @@ class MainActivity : AppCompatActivity() {
             when (requestCode) {
                 CAMERA_REQUEST_CODE -> {
                     val bitmap = data?.extras?.get("data") as Bitmap
-
                     binding.plantImage.load(bitmap)
                 }
                 GALLERY_REQUEST_CODE -> {
-
                     binding.plantImage.load(data?.data)
+                }
+                LOCATION_PERMISSION_REQUEST_CODE -> {
+                    requestLocationUpdates()
                 }
             }
         }

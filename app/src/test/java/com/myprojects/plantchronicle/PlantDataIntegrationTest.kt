@@ -1,7 +1,7 @@
 package com.myprojects.plantchronicle
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.myprojects.plantchronicle.dao.dto.Plant
+import com.myprojects.plantchronicle.dto.Plant
 import com.myprojects.plantchronicle.service.PlantService
 import com.myprojects.plantchronicle.ui.main.MainViewModel
 import io.mockk.confirmVerified
