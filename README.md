@@ -15,9 +15,13 @@ Plant Chronicle can assist you with:
 
 Using your Android device to create a personalized plant diary. Capturing photos with the on-device camera and setting reminders based on previous years' experiences. Receiving alerts about upcoming events for your plants.  
 
-## Storyboard
+### Phone Display
+<img src="https://user-images.githubusercontent.com/78507684/232845521-0be4cec9-4831-41f3-a750-2ed53ba7cbe9.png" width="30%" height="30%">&ensp;
 
 ## Functional Requirements
+
+### take picture of plants
+<img src="https://user-images.githubusercontent.com/78507684/232845612-bb92fc0c-a57f-42f7-a82d-8bc874b2c68c.webm" width="30%" height="30%">
 
 ### requirement 100.0: search for plants
 
